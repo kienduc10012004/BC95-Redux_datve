@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đặt Vé Xem Phim – CyberLearn.vn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Màn hình chiếu: dùng border trick tạo hình thang */
+    .man-hinh {
+      border-bottom: 50px solid rgb(255, 159, 95);
+      border-left:   50px solid transparent;
+      border-right:  50px solid transparent;
+      filter: drop-shadow(0 20px 30px rgba(255, 200, 100, 0.45));
+      width: 80%;
+      margin: 0 auto;
+      position: relative;
+    }
+    .man-hinh-label {
+      position: absolute;
+      bottom: -42px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 6px;
+      white-space: nowrap;
+    }
+
+    /* Base ghế */
+    .ghe {
+      width: 38px;
+      height: 30px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Ghế chưa đặt: viền cam, nền trong suốt */
+    .ghe-trong {
+      border: 2px solid #f97316;
+      color: #fff;
+    }
+
+    /* Ghế đang chọn (khách đang chọn): nền xanh lá */
+    .ghe-chon {
+      border: 2px solid #4ade80;
+      background-color: #4ade80;
+      color: #000;
+    }
+
+    /* Ghế đã đặt: nền cam đậm */
+    .ghe-dat {
+      border: 2px solid #f97316;
+      background-color: #f97316;
+      color: #000;
+      cursor: not-allowed;
+    }
+
+    /* Cuộn ngang trên màn nhỏ */
+    .rap-wrap {
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .rap-inner { min-width: max-content; }
+
+    ::-webkit-scrollbar { height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #92400e; border-radius: 99px; }
+  </style>
+</head>
+
+<body
+  class="min-h-screen bg-cover bg-center bg-no-repeat"
+  style="background-image: url('../public/bgmovie.jpg'); background-color:#1a0800;"
+>
+
+  <!-- Overlay tối -->
+  <div class="min-h-screen bg-black/65">
+
+    <!-- ══ HEADER ══ -->
+    <header class="text-center py-5">
+      <h1 class="text-yellow-400 text-2xl md:text-3xl font-extrabold tracking-widest uppercase">
+        Đặt Vé Xem Phim CyberLearn.vn
+      </h1>
+    </header>
+
+    <!-- ══ MAIN: 2 CỘT ══ -->
+    <main class="container mx-auto px-4 pb-12 flex flex-col lg:flex-row gap-8">
+
+      <!-- ╔═══════════════════════════════════════════════════╗
+           ║  COMPONENT: RapPhim                               ║
+           ║  File:      src/components/RapPhim.jsx            ║
+           ║  Vị trí:    cột trái, chiếm phần còn lại (flex-1) ║
+           ║  Nội dung:  màn hình chiếu + sơ đồ toàn bộ ghế   ║
+           ╚═══════════════════════════════════════════════════╝ -->
+      <section class="flex-1 flex flex-col items-center">
+
+        <!-- Màn hình chiếu -->
+        <div class="w-full flex justify-center mb-14">
+          <div class="man-hinh">
+            <span class="man-hinh-label">MÀN HÌNH</span>
+          </div>
+        </div>
+
+        <!-- Sơ đồ ghế -->
+        <div class="rap-wrap w-full">
+          <div class="rap-inner flex flex-col gap-1">
+
+            <!-- ── HEADER SỐ CỘT ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0"></div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">1</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">2</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">3</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">4</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">5</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">6</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">7</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">8</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">9</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">10</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">11</div>
+              <div class="w-[38px] h-[30px] flex items-center justify-center text-yellow-400 text-xs font-bold flex-shrink-0">12</div>
+            </div>
+
+            <!-- ── HÀNG A ── A1,A2,A3 đang chọn | A11,A12 đã đặt ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">A</div>
+              <div class="ghe ghe-chon">A1</div>
+              <div class="ghe ghe-chon">A2</div>
+              <div class="ghe ghe-chon">A3</div>
+              <div class="ghe ghe-trong">A4</div>
+              <div class="ghe ghe-trong">A5</div>
+              <div class="ghe ghe-trong">A6</div>
+              <div class="ghe ghe-trong">A7</div>
+              <div class="ghe ghe-trong">A8</div>
+              <div class="ghe ghe-trong">A9</div>
+              <div class="ghe ghe-trong">A10</div>
+              <div class="ghe ghe-dat">A11</div>
+              <div class="ghe ghe-dat">A12</div>
+            </div>
+
+            <!-- ── HÀNG B ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">B</div>
+              <div class="ghe ghe-trong">B1</div>
+              <div class="ghe ghe-trong">B2</div>
+              <div class="ghe ghe-trong">B3</div>
+              <div class="ghe ghe-trong">B4</div>
+              <div class="ghe ghe-trong">B5</div>
+              <div class="ghe ghe-trong">B6</div>
+              <div class="ghe ghe-trong">B7</div>
+              <div class="ghe ghe-trong">B8</div>
+              <div class="ghe ghe-trong">B9</div>
+              <div class="ghe ghe-trong">B10</div>
+              <div class="ghe ghe-trong">B11</div>
+              <div class="ghe ghe-trong">B12</div>
+            </div>
+
+            <!-- ── HÀNG C ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">C</div>
+              <div class="ghe ghe-trong">C1</div>
+              <div class="ghe ghe-trong">C2</div>
+              <div class="ghe ghe-trong">C3</div>
+              <div class="ghe ghe-trong">C4</div>
+              <div class="ghe ghe-trong">C5</div>
+              <div class="ghe ghe-trong">C6</div>
+              <div class="ghe ghe-trong">C7</div>
+              <div class="ghe ghe-trong">C8</div>
+              <div class="ghe ghe-trong">C9</div>
+              <div class="ghe ghe-trong">C10</div>
+              <div class="ghe ghe-trong">C11</div>
+              <div class="ghe ghe-trong">C12</div>
+            </div>
+
+            <!-- ── HÀNG D ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">D</div>
+              <div class="ghe ghe-trong">D1</div>
+              <div class="ghe ghe-trong">D2</div>
+              <div class="ghe ghe-trong">D3</div>
+              <div class="ghe ghe-trong">D4</div>
+              <div class="ghe ghe-trong">D5</div>
+              <div class="ghe ghe-trong">D6</div>
+              <div class="ghe ghe-trong">D7</div>
+              <div class="ghe ghe-trong">D8</div>
+              <div class="ghe ghe-trong">D9</div>
+              <div class="ghe ghe-trong">D10</div>
+              <div class="ghe ghe-trong">D11</div>
+              <div class="ghe ghe-trong">D12</div>
+            </div>
+
+            <!-- ── HÀNG E ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">E</div>
+              <div class="ghe ghe-trong">E1</div>
+              <div class="ghe ghe-trong">E2</div>
+              <div class="ghe ghe-trong">E3</div>
+              <div class="ghe ghe-trong">E4</div>
+              <div class="ghe ghe-trong">E5</div>
+              <div class="ghe ghe-trong">E6</div>
+              <div class="ghe ghe-trong">E7</div>
+              <div class="ghe ghe-trong">E8</div>
+              <div class="ghe ghe-trong">E9</div>
+              <div class="ghe ghe-trong">E10</div>
+              <div class="ghe ghe-trong">E11</div>
+              <div class="ghe ghe-trong">E12</div>
+            </div>
+
+            <!-- ── HÀNG F ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">F</div>
+              <div class="ghe ghe-trong">F1</div>
+              <div class="ghe ghe-trong">F2</div>
+              <div class="ghe ghe-trong">F3</div>
+              <div class="ghe ghe-trong">F4</div>
+              <div class="ghe ghe-trong">F5</div>
+              <div class="ghe ghe-trong">F6</div>
+              <div class="ghe ghe-trong">F7</div>
+              <div class="ghe ghe-trong">F8</div>
+              <div class="ghe ghe-trong">F9</div>
+              <div class="ghe ghe-trong">F10</div>
+              <div class="ghe ghe-trong">F11</div>
+              <div class="ghe ghe-trong">F12</div>
+            </div>
+
+            <!-- ── HÀNG G ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">G</div>
+              <div class="ghe ghe-trong">G1</div>
+              <div class="ghe ghe-trong">G2</div>
+              <div class="ghe ghe-trong">G3</div>
+              <div class="ghe ghe-trong">G4</div>
+              <div class="ghe ghe-trong">G5</div>
+              <div class="ghe ghe-trong">G6</div>
+              <div class="ghe ghe-trong">G7</div>
+              <div class="ghe ghe-trong">G8</div>
+              <div class="ghe ghe-trong">G9</div>
+              <div class="ghe ghe-trong">G10</div>
+              <div class="ghe ghe-trong">G11</div>
+              <div class="ghe ghe-trong">G12</div>
+            </div>
+
+            <!-- ── HÀNG H ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">H</div>
+              <div class="ghe ghe-trong">H1</div>
+              <div class="ghe ghe-trong">H2</div>
+              <div class="ghe ghe-trong">H3</div>
+              <div class="ghe ghe-trong">H4</div>
+              <div class="ghe ghe-trong">H5</div>
+              <div class="ghe ghe-trong">H6</div>
+              <div class="ghe ghe-trong">H7</div>
+              <div class="ghe ghe-trong">H8</div>
+              <div class="ghe ghe-trong">H9</div>
+              <div class="ghe ghe-trong">H10</div>
+              <div class="ghe ghe-trong">H11</div>
+              <div class="ghe ghe-trong">H12</div>
+            </div>
+
+            <!-- ── HÀNG I ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">I</div>
+              <div class="ghe ghe-trong">I1</div>
+              <div class="ghe ghe-trong">I2</div>
+              <div class="ghe ghe-trong">I3</div>
+              <div class="ghe ghe-trong">I4</div>
+              <div class="ghe ghe-trong">I5</div>
+              <div class="ghe ghe-trong">I6</div>
+              <div class="ghe ghe-trong">I7</div>
+              <div class="ghe ghe-trong">I8</div>
+              <div class="ghe ghe-trong">I9</div>
+              <div class="ghe ghe-trong">I10</div>
+              <div class="ghe ghe-trong">I11</div>
+              <div class="ghe ghe-trong">I12</div>
+            </div>
+
+            <!-- ── HÀNG J ── -->
+            <div class="flex items-center gap-1">
+              <div class="w-6 flex-shrink-0 text-yellow-400 text-base font-extrabold text-center">J</div>
+              <div class="ghe ghe-trong">J1</div>
+              <div class="ghe ghe-trong">J2</div>
+              <div class="ghe ghe-trong">J3</div>
+              <div class="ghe ghe-trong">J4</div>
+              <div class="ghe ghe-trong">J5</div>
+              <div class="ghe ghe-trong">J6</div>
+              <div class="ghe ghe-trong">J7</div>
+              <div class="ghe ghe-trong">J8</div>
+              <div class="ghe ghe-trong">J9</div>
+              <div class="ghe ghe-trong">J10</div>
+              <div class="ghe ghe-trong">J11</div>
+              <div class="ghe ghe-trong">J12</div>
+            </div>
+
+          </div><!-- rap-inner -->
+        </div><!-- rap-wrap -->
+      </section>
+
+      <!-- ╔═══════════════════════════════════════════════════════╗
+           ║  COMPONENT: DanhSachGheChon                           ║
+           ║  File:      src/components/DanhSachGheChon.jsx        ║
+           ║  Vị trí:    cột phải, cố định 320px (lg:w-80)        ║
+           ║  Nội dung:  chú thích màu + bảng ghế + tổng + nút    ║
+           ╚═══════════════════════════════════════════════════════╝ -->
+      <aside class="w-full lg:w-80 flex-shrink-0">
+        <div class="bg-black/50 border border-yellow-700 rounded-2xl p-5 sticky top-4">
+
+          <!-- Tiêu đề -->
+          <h2 class="text-yellow-400 text-lg font-extrabold text-center tracking-widest uppercase mb-5">
+            Danh Sách Ghế Bạn Chọn
+          </h2>
+
+          <!-- Chú thích màu sắc -->
+          <div class="flex flex-col gap-2 mb-5">
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-5 rounded bg-orange-500 flex-shrink-0"></div>
+              <span class="text-yellow-200 text-sm">Ghế đã đặt</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-5 rounded bg-green-400 flex-shrink-0"></div>
+              <span class="text-yellow-200 text-sm">Ghế đang chọn</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-7 h-5 rounded border-2 border-orange-500 flex-shrink-0"></div>
+              <span class="text-yellow-200 text-sm">Ghế chưa đặt</span>
+            </div>
+          </div>
+
+          <!-- Bảng ghế đã chọn (mock: A1, A2, A3) -->
+          <div class="border border-yellow-700 rounded-xl overflow-hidden mb-4">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-yellow-700 bg-black/30">
+                  <th class="text-yellow-400 py-2 px-3 text-left font-bold">Số ghế</th>
+                  <th class="text-yellow-400 py-2 px-3 text-left font-bold">Giá (đ)</th>
+                  <th class="text-yellow-400 py-2 px-3 text-center font-bold">Hủy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Ghế A1 -->
+                <tr class="border-b border-yellow-900/50">
+                  <td class="text-orange-400 py-2 px-3 font-bold">A1</td>
+                  <td class="text-orange-400 py-2 px-3">150.000</td>
+                  <td class="py-2 px-3 text-center">
+                    <span class="text-red-500 font-bold text-base leading-none cursor-pointer">✕</span>
+                  </td>
+                </tr>
+                <!-- Ghế A2 -->
+                <tr class="border-b border-yellow-900/50">
+                  <td class="text-orange-400 py-2 px-3 font-bold">A2</td>
+                  <td class="text-orange-400 py-2 px-3">150.000</td>
+                  <td class="py-2 px-3 text-center">
+                    <span class="text-red-500 font-bold text-base leading-none cursor-pointer">✕</span>
+                  </td>
+                </tr>
+                <!-- Ghế A3 -->
+                <tr class="border-b border-yellow-900/50">
+                  <td class="text-orange-400 py-2 px-3 font-bold">A3</td>
+                  <td class="text-orange-400 py-2 px-3">150.000</td>
+                  <td class="py-2 px-3 text-center">
+                    <span class="text-red-500 font-bold text-base leading-none cursor-pointer">✕</span>
+                  </td>
+                </tr>
+                <!-- Tổng tiền -->
+                <tr>
+                  <td class="text-yellow-300 py-2 px-3 font-bold">Tổng tiền</td>
+                  <td class="text-orange-400 py-2 px-3 font-extrabold">450.000</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Nút Đặt Vé -->
+          <button
+            class="w-full bg-orange-500 hover:bg-orange-400 text-black font-extrabold
+                   py-3 rounded-xl tracking-widest uppercase text-sm cursor-pointer
+                   transition-colors"
+          >
+            Đặt Vé
+          </button>
+
+        </div>
+      </aside>
+
+    </main>
+  </div>
+
+</body>
+</html>
