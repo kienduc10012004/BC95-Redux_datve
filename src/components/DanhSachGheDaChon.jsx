@@ -48,7 +48,7 @@ const DanhsachGheDaChon = () => {
                     </div>
                 </div>
                 {/* Bảng ghế đã chọn (mock: A1, A2, A3) */}
-                <div className="border border-yellow-700 rounded-xl overflow-hidden mb-4">
+                <div className={`border border-yellow-700 rounded-xl ${gheKhachChon.length > 5 ? 'max-h-80' : ''} overflow-y-auto mb-4`}>
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="border-b border-yellow-700 bg-black/30">
